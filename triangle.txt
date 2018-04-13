@@ -1,0 +1,47 @@
+org 100h
+.data 
+    x db 0
+.code  
+
+    mov ah,1
+    int 21h
+    inc al
+    mov x,al
+    mov cl,1
+    mov bl,1
+    
+    mov ah,2
+    
+    call nline
+    
+    mov dl,'*'
+    
+    
+    top:
+        int 21h
+        loop top
+    
+    inc bl
+    mov cl,bl
+     
+    call nline
+    
+    mov dl,'*'
+    
+    mov al,x
+    sub al,48
+    
+    cmp bl,al
+    jne top 
+    
+    nline:
+    mov ah,2
+    mov dl,0ah
+    int 21h
+    mov dl,0dh
+    int 21h
+    ret
+    
+
+ 
+    

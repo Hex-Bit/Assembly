@@ -1,0 +1,97 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+; add your code here 
+
+
+.model small
+.stack 100h
+.data
+
+
+a db "Enter a Character to check :$"
+d db "Digit $"
+u db "UPPERCASE $"
+l db "lowercase $"
+x db ?
+
+
+.code
+main proc 
+    mov ax,@data
+    mov ds,ax 
+    
+    
+    mov ah,9
+    lea dx,a
+    int 21h
+    
+    mov ah,1
+    int 21h
+    
+
+    cmp al,48
+    jl exit
+    cmp al,57
+    jg upper
+     
+     call newline
+     
+    mov ah,9
+    lea dx,d
+    int 21h 
+    
+    
+    
+     upper:
+     
+     cmp al,65
+     jl exit
+     cmp al,90
+     jg lower
+     
+      call newline
+     
+    mov ah,9
+    lea dx,u
+    int 21h
+     
+     lower:
+     
+     cmp al,97
+     jl exit
+     cmp al,122
+     jg exit
+     
+         call newline
+     
+    mov ah,9
+    lea dx,l
+    int 21h
+     
+    
+    newline:
+    mov ah,2
+    mov dl,0ah
+    int 21h
+    mov dl,0dh
+    int 21h
+    ret
+    
+    
+    exit:
+    mov ax,4ch
+    int 21h
+    main endp
+end main
+
+    
+
+
+
+
+
+

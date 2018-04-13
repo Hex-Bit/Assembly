@@ -1,0 +1,79 @@
+org 100h
+
+; add your code here 
+
+
+.model small
+.stack 100h
+.data
+
+
+a db "Enter Lower case Character :$" 
+b db "Enter UPPER case Character :$" 
+a1 db "From lower to UPPEr is : $" 
+b1 db "From Upper to lower is :$"
+
+x db ?
+
+
+.code
+main proc 
+    mov ax,@data
+    mov ds,ax
+ 
+    mov ah,9
+    lea dx,a
+    int 21h  
+    
+    mov ah,1
+    int 21h
+    
+    sub al,32
+    mov x,al
+    
+    call newline 
+    
+    mov ah,9
+    lea dx,a1
+    int 21h
+    
+    mov ah,2
+    mov dl,x
+    int 21h
+    call newline
+    call newline
+    
+    mov ah,9
+    lea dx,b
+    int 21h
+    
+    mov ah,1
+    int 21h
+    add al,32
+    mov x,al
+      
+    call newline
+
+    mov ah,9
+    lea dx,b1
+    int 21h
+
+     mov ah,2
+    mov dl,x
+    int 21h
+    
+
+    newline:
+    mov ah,2
+    mov dl,0ah
+    int 21h
+    mov dl,0dh
+    int 21h
+    ret
+    
+    
+    
+    mov ax,4ch
+    int 21h
+    main endp
+end main

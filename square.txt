@@ -1,0 +1,59 @@
+
+; You may customize this and other start-up templates; 
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+.model small
+.stack 100h
+.data
+.code
+main proc
+    
+    
+    mov cx,3
+     
+    
+    l1:
+     
+    mov bx,cx
+    
+    mov cx,bx
+    
+    l2:
+     mov dl,"*"
+     
+     mov ah,2
+     int 21h 
+     mov dl," " 
+     mov ah,2
+     int 21h
+     
+
+    loop l2
+        
+    mov cx,bx
+     
+    call nline
+    
+    
+    
+    loop l1
+    
+    
+    call exit 
+
+       nline:
+       mov ah,2
+     mov dl,0ah
+     int 21h
+     mov dl,0dh
+     int 21h
+     ret
+     
+     exit:
+     
+     mov ax,4ch
+     int 21h
+     main endp
+end main
